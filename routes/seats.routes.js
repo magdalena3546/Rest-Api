@@ -9,18 +9,31 @@ router.route('/seats').get((req, res) => {
     res.json(db.seats);
 });
 
+
+
 router.route('/seats').post((req, res) => {
-    const elm = {
-        id: uuidv4(),
-        day: req.body.day,
-        seat: req.body.seat,
-        client: req.body.client,
-        email: req.body.email,
-    };
-    db.seats.push(elm);
-    res.json({
-        message: 'OK'
+
+    const isFound = db.seats.some((elm) => {
+        return (elm.seat == req.body.seat && elm.day == req.body.day);
     });
+
+    if (isFound) {
+        res.status(409).json({
+            message: 'The slot is already taken...',
+        })
+    } else {
+        const element = {
+            id: uuidv4(),
+            day: req.body.day,
+            seat: req.body.seat,
+            client: req.body.client,
+            email: req.body.email,
+        };
+        db.seats.push(element);
+        res.json({
+            message: 'OK'
+        });
+    }
 });
 
 router.route('/seats/:id').put((req, res) => {
