@@ -2,14 +2,12 @@ import { Button, Form, FormGroup, Label, Input, Row, Col, Alert, Progress } from
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSeatRequest, getRequests, loadSeatsRequest } from '../../../redux/seatsRedux';
-
 import './OrderTicketForm.scss';
 import SeatChooser from './../SeatChooser/SeatChooser';
 
 const OrderTicketForm = () => {
   const dispatch = useDispatch();
   const requests = useSelector(getRequests);
-  console.log(requests);
 
   const [order, setOrder] = useState({
     client: '',
