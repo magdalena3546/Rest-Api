@@ -7,8 +7,9 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(cors());
 
-mongoose.connect('mongodb://localhost:27017/NewWaveDB', {
-    useNewUrlParser: true
+mongoose.connect('mongodb+srv://magdalena3546:Kodilla2222@cluster0.hq9lghu.mongodb.net/NewWaveDB?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 });
 const db = mongoose.connection;
 
