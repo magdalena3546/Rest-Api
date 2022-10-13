@@ -7,7 +7,14 @@ const mongoose = require('mongoose');
 const app = express();
 app.use(cors());
 
-mongoose.connect('mongodb+srv://magdalena3546:Kodilla2222@cluster0.hq9lghu.mongodb.net/NewWaveDB?retryWrites=true&w=majority', {
+const NODE_ENV = process.env.NODE_ENV;
+let dbUri = '';
+
+if (NODE_ENV === 'production') dbUri = 'url to remote db';
+else if (NODE_ENV === 'test') dbUri = 'mongodb://localhost:27017/NewWaveDBtest';
+else dbUri = 'mongodb://localhost:27017/NewWaveDB';
+
+mongoose.connect(dbUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -61,3 +68,5 @@ io.on('connection', (socket) => {
     console.log('New client', socket.id);
     socket.emit('seatsUpdated', db.seats);
 });
+
+module.exports = server;

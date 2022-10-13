@@ -25,6 +25,7 @@ exports.add = async (req, res) => {
             email: email
         });
         await newSeat.save();
+        // req.io.emit('seatsUpdated', db.seats);
         res.json({
             message: 'OK'
         });
