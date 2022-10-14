@@ -3,9 +3,11 @@ const cors = require('cors');
 const path = require('path');
 const socket = require('socket.io')
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 const app = express();
 app.use(cors());
+app.use(helmet());
 
 const NODE_ENV = process.env.NODE_ENV;
 let dbUri = '';
